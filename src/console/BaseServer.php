@@ -87,7 +87,7 @@ class BaseServer extends Command
 
         unset($server);
 
-        if (file_exists($pidFile) && posix_kill(file_get_contents($pidFile), 10)) {
+        if (file_exists($pidFile) && posix_kill(file_get_contents($pidFile), SIGUSR1)) {
             return 0;
         }
 
@@ -100,7 +100,7 @@ class BaseServer extends Command
 
         unset($server);
 
-        if (file_exists($pidFile) && posix_kill(file_get_contents($pidFile), 15)) {
+        if (file_exists($pidFile) && posix_kill(file_get_contents($pidFile), SIGTERM)) {
             do {
                 usleep(100000);
             } while (file_exists($pidFile));
